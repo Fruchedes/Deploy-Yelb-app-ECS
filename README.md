@@ -3,9 +3,45 @@
 
 When experimenting with new technologies you often follow tutorials that let you deploy purpose-built simple demo application. With Yelb I wanted to make this experience the other way around: start with an existing application and adapt it to the various technologies, services and platforms you are learning. I found this to be way more fun and useful. 
 
-This was particularly true as I embarked with the challenge of learning different abstractions available in the cloud:
 
-![1675856852108](https://github.com/Fruchedes/Deploy-Yelb-app-ECS/assets/152749461/11ccef9c-8802-4804-84fe-cbc6ebc2d62e)
+1. User's Journey:
+A user accesses the Yelb application through a web browser.
+
+3. Request Forwarded to Load Balancer (In the Case of Load Balancer Deployment):
+
+If the application is deployed with a load balancer (e.g., in a containerized environment or using AWS Elastic Load Balancing), the user's request is initially directed to the load balancer.
+3. Load Balancer Routing:
+
+The load balancer distributes incoming requests across multiple instances of the yelb-ui component.
+The load balancer ensures even distribution of traffic for scalability and fault tolerance.
+4. Front-end (yelb-ui) Handling:
+
+The load balancer forwards the user's request to one of the instances running the yelb-ui component.
+The yelb-ui component serves JS code to the user's browser.
+The code is compiled from an Angular 2 application, providing a dynamic user interface.
+5. Front-end Interaction with Sinatra (yelb-appserver):
+
+When a user interacts with the UI (e.g., voting for a restaurant), the yelb-ui component communicates with the back-end logic layer (yelb-appserver).
+6. Communication with Sinatra (yelb-appserver):
+
+The yelb-ui sends HTTP requests to the yelb-appserver API.
+The API is implemented using Sinatra, a Ruby web framework.
+The yelb-appserver processes requests, updates pie charts based on votes, and interacts with the Redis cache and Postgres database.
+7. Interaction with Cache (Redis):
+
+For page views, the yelb-appserver interacts with a Redis cache to store and retrieve the number of page views.
+Redis is used for its fast in-memory storage capabilities.
+8. Interaction with Database (Postgres or DynamoDB):
+
+For persisting votes, the yelb-appserver interacts with a Postgres database in the traditional deployment model.
+In the serverless deployment model, DynamoDB is used as a replacement for both Redis and Postgres.
+9. Response to User:
+
+The yelb-appserver processes the user's request, updates data in the cache and database, and sends a response back to the yelb-ui.
+The yelb-ui dynamically updates based on the response, reflecting changes in the UI.
+10. User Experience:
+
+The user experiences a dynamic application where votes are processed, pie charts are updated, and the page reflects real-time interactions.
 
 Yelb can be deployed (potentially) on each of these abstractions from bare metal (EC2) all the way to Lambda (serverless). 
 
