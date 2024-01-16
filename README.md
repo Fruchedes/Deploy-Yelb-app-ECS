@@ -5,9 +5,7 @@ When experimenting with new technologies you often follow tutorials that let you
 
 This was particularly true as I embarked with the challenge of learning different abstractions available in the cloud:
 
-![cloud-abstractions](images/cloud-abstractions.png)
-
-See [this blog post](http://www.it20.info/2018/06/compute-abstractions-on-aws/) for more information.
+![1675856852108](https://github.com/Fruchedes/Deploy-Yelb-app-ECS/assets/152749461/11ccef9c-8802-4804-84fe-cbc6ebc2d62e)
 
 Yelb can be deployed (potentially) on each of these abstractions from bare metal (EC2) all the way to Lambda (serverless). 
 
